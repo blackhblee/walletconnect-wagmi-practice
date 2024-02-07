@@ -41,7 +41,7 @@ export const siweConfig = createSIWEConfig({
     try {
       const success = await signIn("credentials", {
         message,
-        redirect: true,
+        redirect: false,
         signature,
         callbackUrl: "/",
       });

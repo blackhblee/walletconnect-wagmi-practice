@@ -1,10 +1,21 @@
 "use client";
 
 import { useWeb3Modal, useWeb3ModalState } from "@web3modal/wagmi/react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const LoginTemplate = () => {
+  const router = useRouter();
   const modal = useWeb3Modal();
   const state = useWeb3ModalState();
+  const { status } = useSession();
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/");
+    }
+  }, [status, router]);
 
   return (
     <div className="flex h-screen w-full items-center justify-center bg-zinc-50 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
