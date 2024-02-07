@@ -4,6 +4,7 @@ import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react";
 
 import { WagmiConfig } from "wagmi";
 import { arbitrum, mainnet } from "viem/chains";
+import { siweConfig } from "../_utils/siweUtils";
 
 // 1. Get projectId at https://cloud.walletconnect.com
 const projectId = `${process.env.NEXT_PUBLIC_PROJECT_ID}`;
@@ -21,6 +22,7 @@ const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata });
 
 // 3. Create modal
 createWeb3Modal({
+  siweConfig,
   wagmiConfig,
   projectId,
   chains,

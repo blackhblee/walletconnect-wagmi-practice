@@ -1,24 +1,16 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useAccount, useDisconnect } from "wagmi";
+import { useAccount } from "wagmi";
+import { disconnect } from "wagmi/actions";
 
 const Home = () => {
   const [mounted, setMounted] = useState(false);
-  const router = useRouter();
-  const { address, isDisconnected, isConnected } = useAccount();
-  const { disconnect } = useDisconnect();
+  const { address, isConnected } = useAccount();
 
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  useEffect(() => {
-    if (isDisconnected) {
-      router.push("/login");
-    }
-  }, [isDisconnected, router]);
 
   return (
     <>
@@ -34,8 +26,8 @@ const Home = () => {
                 <div className="mb-2">My Address : {address}</div>
                 <button
                   className="w-48 h-12 rounded-md text-zinc-50 bg-[#4F46E5] hover:bg-[#4338CA] transition-colors duration-300"
-                  onClick={() => {
-                    disconnect();
+                  onClick={async () => {
+                    await disconnect();
                   }}
                   type="button"
                 >
